@@ -1,0 +1,51 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+Assets/AssetStoreTools*
+
+# Visual Studio cache directory
+.vs/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# Unity auto-generated
+ExportedObj/
+.consulo/
+*.pidb.meta
+
+# Crash Reports
+sysinfo.txt
+
+# Rider
+.idea
+*.sln.iml
+
+# TextMesh Pro internal files
+TextMesh Pro/
+
+# Gradle
+.gradle/
+gradle/
+**/gradle-wrapper.jar
+
+# Build results
+*.apk
+*.aab
+*.unitypackage
+
+# Cache
+*.stackdump
+.DS_Store
