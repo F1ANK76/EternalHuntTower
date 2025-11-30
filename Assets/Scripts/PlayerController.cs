@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 _lastMove;
     private float _lastAttackTime;
 
+    public WeaponHitbox _weaponHitbox;
+    public void DisableWeaponHitbox()
+    {
+        _weaponHitbox.DisableAll();
+    }
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -60,18 +66,30 @@ public class PlayerController : MonoBehaviour
 
     private void TriggerAttack(bool isLeftClick)
     {
-        // 마우스 월드 좌표 계산
         Vector3 mouseWorldPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0f;
 
-        // 플레이어 → 마우스 방향 벡터
         Vector2 attackDirection = (mouseWorldPos - transform.position).normalized;
 
-        // BlendTree용 파라미터 설정
         _animator.SetFloat("AttackX", attackDirection.x);
         _animator.SetFloat("AttackY", attackDirection.y);
 
         _animator.SetBool("IsLeftClick", isLeftClick);
         _animator.SetTrigger("Attack");
+
+        // 여기서 공격 방향에 맞는 히트박스 활성화
+        if (_weaponHitbox != null)
+        {
+            if (Mathf.Abs(attackDirection.x) > Mathf.Abs(attackDirection.y))
+            {
+                if (attackDirection.x > 0) _weaponHitbox.EnableHitbox("Right");
+                else _weaponHitbox.EnableHitbox("Left");
+            }
+            else
+            {
+                if (attackDirection.y > 0) _weaponHitbox.EnableHitbox("Up");
+                else _weaponHitbox.EnableHitbox("Down");
+            }
+        }
     }
 }
